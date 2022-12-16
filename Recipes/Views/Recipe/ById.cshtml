@@ -1,0 +1,158 @@
+﻿@model Recipes.Models.InputRecipeModel
+
+<head>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+</head>
+
+<section class="single-recipe-wrap-layout1 padding-top-74 padding-bottom-50 ">
+
+    <div class="container ">
+        <div class="row gutters-60">
+            <div class="col-lg-8">
+                <div class="single-recipe-layout1">
+
+                    <div class="ctg-name">@Model.CategoryName</div>
+                    <h2 class="item-title">@Model.Name</h2>
+                    <div class="row mb-4">
+                        <div class="col-xl-9 col-12">
+                            <ul class="entry-meta">
+                                <li class="single-meta">
+                                    <a href="#">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>Nov 14,
+                                        2018
+                                    </a>
+                                </li>
+                                <li class="single-meta">
+                                    <a href="#">
+                                        <i class="fa fa-user"></i>by <span>
+                                            Kazi
+                                            Fahim
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="single-meta">
+                                    <ul class="item-rating">
+                                        <li class="star-fill"><i class="fa fa-star"></i></li>
+                                        <li class="star-fill"><i class="fa fa-star"></i></li>
+                                        <li class="star-fill"><i class="fa fa-star"></i></li>
+                                        <li class="star-fill"><i class="fa fa-star"></i></li>
+                                        <li class="star-empty"><i class="fa fa-star"></i></li>
+                                        <li><span>9<span> / 10</span></span> </li>
+                                    </ul>
+                                </li>
+                                <li class="single-meta">
+                                    <a href="#">
+                                        <i class="fa fa-heart"></i><span>02</span>
+                                        Likes
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xl-3 col-12">
+                            <ul class="action-item">
+                                <li><button><i class="fa fa-print"></i></button></li>
+                                <li><button><i class="fa fa-expand-arrows-alt"></i></button></li>
+                                <li class="action-share-hover">
+                                    <button><i class="fa fa-share-alt"></i></button>
+                                    <div class="action-share-wrap">
+                                        <a href="#" title="facebook"><i class="fa fa-facebook-f"></i></a>
+                                        <a href="#" title="twitter"><i class="fa fa-twitter"></i></a>
+                                        <a href="#" title="linkedin"><i class="fa fa-linkedin-in"></i></a>
+                                        <a href="#" title="pinterest"><i class="fa fa-pinterest-p"></i></a>
+                                        <a href="#" title="skype"><i class="fa fa-skype"></i></a>
+                                        <a href="#" title="rss"><i class="fa fa-rss"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item-figure">
+                        <img src="@Model.ImgURL" width="800px" height="600px;">
+                    </div>
+                    <div class="item-feature">
+                        <ul>
+                            <li>
+                                <div class="feature-wrap">
+                                    <div class="media">
+                                        <div class="feature-icon">
+                                            <i class="fa fa-clock"></i>
+                                        </div>
+                                        <div class="media-body space-sm">
+                                            <div class="feature-title">PREP TIME</div>
+                                            <div class="feature-sub-title">@Model.PreparationTime Mins</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="feature-wrap">
+                                    <div class="media">
+                                        <div class="feature-icon">
+                                            <i class="fa fa-cutlery" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="media-body space-sm">
+                                            <div class="feature-title">COOK TIME</div>
+                                            <div class="feature-sub-title">@Model.CookingTime Mins</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="feature-wrap">
+                                    <div class="media">
+                                        <div class="feature-icon">
+                                            <i class="fa fa-users"></i>
+                                        </div>
+                                        <div class="media-body space-sm">
+                                            <div class="feature-title">SERVING</div>
+                                            <div class="feature-sub-title">@Model.PortionCount People</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="feature-wrap">
+                                    <div class="media">
+                                        <div class="feature-icon">
+                                            <i class="fa fa-eye"></i>
+                                        </div>
+                                        <div class="media-body space-sm">
+                                            <div class="feature-title">VIEWS</div>
+                                            <div class="feature-sub-title">3,450</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="item-description">
+                        @Model.Description
+                    </p>
+                    <p class="item-description">
+
+                    </p>
+                    <div class="making-elements-wrap">
+                        <div class="row">
+                            <div class="col-xl-6 col-12">
+                                <div class="ingridients-wrap">
+                                    <h3 class="item-title"><i class="fa fa-list-ul"></i>Ingridients</h3>
+                                    @foreach (var item in @Model.Ingridients)
+                                    {
+                                        <div class="checkbox checkbox-primary">
+                                            <input id="checkbox1" type="checkbox">
+                                            <label for="checkbox1">@item.Name - @item.Quantity</label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button  type="button" class="btn btn-success" style="width:150px; height:35px; font-size:20px;">Update</button>
+        <button asp-controller="Recipe" asp-action="Delete" asp-route-id="@Model.Id" type="button" class="btn btn-danger" style="width:150px; height:35px; font-size:20px;" >Delete</button>
+
+    </div>
+</section>
+
