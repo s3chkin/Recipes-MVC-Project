@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Recipes.Models;
 using System;
 using System.Collections.Generic;
 
@@ -21,7 +22,7 @@ namespace Recipes.Data.Models
         public virtual Category Category { get; set; } //създаване на връзката
         public virtual ICollection<RecipeIngredient> Ingredients { get; set; }
         public virtual ICollection<Image> Images { get; set; }
-        public IdentityUser AddedByUserId{ get; set; }
-        public virtual IdentityUser AddedByUser{ get; set; }
+        public ApplicationUser AddedByUserId { get; set; }
+        public virtual ApplicationUser AddedByUser { get; set; }
     }
 }

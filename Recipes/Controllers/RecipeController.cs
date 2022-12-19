@@ -15,10 +15,10 @@ namespace Recipes.Controllers
     {
         private readonly ApplicationDbContext db;
         private readonly IWebHostEnvironment webHostEnvironment;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
         private string[] allowedExtention = new[] { "png", "jpg", "jpeg" };
 
-        public RecipeController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, UserManager<IdentityUser> userManager)
+        public RecipeController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, UserManager<ApplicationUser> userManager)
         {
             this.db = db;
             this.webHostEnvironment = webHostEnvironment;
