@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Recipes.Data;
@@ -14,12 +15,14 @@ namespace Recipes.Controllers
     {
         private readonly ApplicationDbContext db;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly UserManager<IdentityUser> userManager;
         private string[] allowedExtention = new[] { "png", "jpg", "jpeg" };
 
-        public RecipeController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
+        public RecipeController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, UserManager<IdentityUser> userManager)
         {
             this.db = db;
             this.webHostEnvironment = webHostEnvironment;
+            this.userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -127,7 +130,7 @@ namespace Recipes.Controllers
         //    {
         //        Id = recipe.Id,
         //        Name = recipe.Name,
-               
+
         //    };
         //    return this.View(model);
         //}
@@ -147,5 +150,29 @@ namespace Recipes.Controllers
             db.SaveChanges();
             return this.RedirectToAction("Index");
         }
+
+        //public JsonResult User()
+        //{
+        //    var user = userManager.GetUserAsync(User);
+        //    return this.Json();
+        //}
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
