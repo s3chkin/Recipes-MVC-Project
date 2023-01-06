@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Recipes.Data;
 using Recipes.Data.Models;
 using Recipes.Models;
+using Recipes.Services;
 using System;
 using System.IO;
 using System.Linq;
@@ -16,13 +17,16 @@ namespace Recipes.Controllers
         private readonly ApplicationDbContext db;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IShortStringService shortStringService;
         private string[] allowedExtention = new[] { "png", "jpg", "jpeg" };
 
-        public RecipeController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, UserManager<ApplicationUser> userManager)
+        public RecipeController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment,
+            UserManager<ApplicationUser> userManager, IShortStringService shortStringService)
         {
             this.db = db;
             this.webHostEnvironment = webHostEnvironment;
             this.userManager = userManager;
+            this.shortStringService = shortStringService; //injektirane
         }
         public IActionResult Index()
         {
@@ -110,7 +114,7 @@ namespace Recipes.Controllers
                 PreparationTime = TimeSpan.FromMinutes(x.PerparationTime.TotalMinutes).Minutes,
                 CookingTime = TimeSpan.FromMinutes(x.CookingTime.TotalMinutes).Minutes,
                 PortionCount = x.PortionCount,
-                Description = x.Description,
+                Description = shortStringService.GetShort(x.Description, 4),
                 ImgURL = $"/img/{x.Images.FirstOrDefault().Id}.{x.Images.FirstOrDefault().Extention}", //четене на снимката от базата данни
                 Ingridients = x.Ingredients.Select(x => new InputRecipeIngridientModel
                 {
