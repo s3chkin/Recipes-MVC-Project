@@ -128,19 +128,32 @@ namespace Recipes.Controllers
             //var category = db.Categories.Where(x => model.CategoryId == x.Id).FirstOrDefault();
             return this.View(model);
         }
-
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             var model = recipeService.GetRecipeById(id);
+            var categories = db.Categories.Select(x =>
+            new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            }).ToList();
+            model.Categories = categories;
             return this.View(model);
         }
         [HttpPost]
-        public IActionResult Edit(InputRecipeModel model) //update
+        public IActionResult Edit(int id, InputRecipeModel model) //update
         {
-            var recipe = db.Recipes.Where(s => s.Id == model.Id).FirstOrDefault(); //търсене
+            var recipe = db.Recipes.FirstOrDefault(x=>x.Id == ); //търсене
             recipe.Name = model.Name;
+            recipe.PerparationTime =TimeSpan.FromMinutes(model.PreparationTime) ;
+            recipe.CookingTime =TimeSpan.FromMinutes(model.CookingTime);
+            recipe.Description = model.Description;
+            recipe.CategoryId = model.CategoryId;
+            recipe.PortionCount = model.PortionCount;
             db.SaveChanges();
-            return this.RedirectToActionPermanent("Index");
+            //return this.RedirectToActionPermanent("Index");
+            return this.Redirect("Index");
         }
 
         public IActionResult Delete(int id)
