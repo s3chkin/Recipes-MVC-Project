@@ -48,6 +48,8 @@ namespace Recipes
             services.AddControllersWithViews();
 
             services.AddTransient<IShortStringService, ShortStringService>();
+
+            services.AddTransient<IRecipeService, RecipeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

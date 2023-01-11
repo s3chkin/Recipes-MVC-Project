@@ -1,9 +1,5 @@
 ﻿@model Recipes.Models.InputRecipeModel
 
-<head>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
-</head>
-
 <section class="single-recipe-wrap-layout1 padding-top-74 padding-bottom-50 ">
 
     <div class="container ">
@@ -11,8 +7,9 @@
             <div class="col-lg-8">
                 <div class="single-recipe-layout1">
 
-                    <div class="ctg-name">@Model.CategoryName</div>
-                    <h2 class="item-title">@Model.Name</h2>
+                    <div class="ctg-name"></div>
+                    @*<input type="text" value="@Model.CategoryName">*@
+                    @*<h2 class="item-title">@Model.Name</h2>*@
                     <div class="row mb-4">
                         <div class="col-xl-9 col-12">
                             <ul class="entry-meta">
@@ -150,9 +147,8 @@
                 </div>
             </div>
         </div>
-        <input type="submit" asp-controller="Recipe" asp-action="Edit" type="button" class="btn btn-success" style="width:150px; height:35px; font-size:20px;">Edit</input>
+        <button  type="button" class="btn btn-success" style="width:150px; height:35px; font-size:20px;">Update</button>
         <button asp-controller="Recipe" asp-action="Delete" asp-route-id="@Model.Id" type="button" class="btn btn-danger" style="width:150px; height:35px; font-size:20px;" >Delete</button>
 
     </div>
 </section>
-

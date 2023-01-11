@@ -18,15 +18,18 @@ namespace Recipes.Controllers
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IShortStringService shortStringService;
+        private readonly IRecipeService recipeService;
         private string[] allowedExtention = new[] { "png", "jpg", "jpeg" };
 
         public RecipeController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment,
-            UserManager<ApplicationUser> userManager, IShortStringService shortStringService)
+            UserManager<ApplicationUser> userManager, IShortStringService shortStringService,
+            IRecipeService recipeService)
         {
             this.db = db;
             this.webHostEnvironment = webHostEnvironment;
             this.userManager = userManager;
             this.shortStringService = shortStringService; //injektirane
+            this.recipeService = recipeService; //injektirane
         }
         public IActionResult Index()
         {
@@ -126,26 +129,19 @@ namespace Recipes.Controllers
             return this.View(model);
         }
 
-        //public IActionResult Edit(int id)
-        //{
-
-        //    var recipe = db.Recipes.Where(s => s.Id == id).FirstOrDefault();
-        //    var model = new InputRecipeModel
-        //    {
-        //        Id = recipe.Id,
-        //        Name = recipe.Name,
-
-        //    };
-        //    return this.View(model);
-        //}
-        //[HttpPost]
-        //public IActionResult Edit(InputRecipeModel model) //update
-        //{
-        //    var recipe = db.Recipes.Where(s => s.Id == model.Id).FirstOrDefault(); //търсене
-        //    recipe.Name = model.Name;
-        //    db.SaveChanges();
-        //    return this.RedirectToActionPermanent("Index");
-        //}
+        public IActionResult Edit(int id)
+        {
+            var model = recipeService.GetRecipeById(id);
+            return this.View(model);
+        }
+        [HttpPost]
+        public IActionResult Edit(InputRecipeModel model) //update
+        {
+            var recipe = db.Recipes.Where(s => s.Id == model.Id).FirstOrDefault(); //търсене
+            recipe.Name = model.Name;
+            db.SaveChanges();
+            return this.RedirectToActionPermanent("Index");
+        }
 
         public IActionResult Delete(int id)
         {
