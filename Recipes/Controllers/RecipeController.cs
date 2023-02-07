@@ -61,6 +61,11 @@ namespace Recipes.Controllers
         [HttpPost]
         public IActionResult Add(InputRecipeModel model)
         {
+            if (!ModelState.IsValid)
+            {
+               return this.View(model);
+            }
+
             //Добавяне на 1 рецепта в базата данни
             var recipe = new Recipe
             {
@@ -144,7 +149,7 @@ namespace Recipes.Controllers
         [HttpPost]
         public IActionResult Edit(int id, InputRecipeModel model) //update
         {
-            var recipe = db.Recipes.FirstOrDefault(x=>x.Id == ); //търсене
+            var recipe = db.Recipes.FirstOrDefault(x=>x.Id == id); //търсене
             recipe.Name = model.Name;
             recipe.PerparationTime =TimeSpan.FromMinutes(model.PreparationTime) ;
             recipe.CookingTime =TimeSpan.FromMinutes(model.CookingTime);

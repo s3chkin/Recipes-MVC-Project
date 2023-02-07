@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recipes.Data;
 
-namespace Recipes.Data.Migrations
+namespace Recipes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221219070707_RecipesDB")]
-    partial class RecipesDB
+    [Migration("20230207070610_recipes")]
+    partial class recipes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
